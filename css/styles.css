@@ -576,19 +576,18 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 /* ─── CONTACT ────────────────────────────────────────────── */
 
-.contact__grid {
+.contact__cards {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 3.5rem;
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
 }
 
-.contact__info-title {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  color: var(--clr-text);
+.contact__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .contact__item {
@@ -632,7 +631,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-size: 0.95rem;
 }
 
-/* Contact Form */
+
+/* ─── CONTACT FORM ───────────────────────────────────────── */
 
 .contact__form {
   background: var(--clr-card-bg);
@@ -677,11 +677,10 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .form__input:focus {
   border-color: var(--clr-primary);
-  box-shadow: 0 0 0 3px rgba(var(--clr-primary-rgb, 45, 106, 79), 0.15);
+  box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.15);
 }
 
 .form__input::placeholder { opacity: 0.55; }
-
 .form__select { appearance: none; cursor: pointer; }
 .form__textarea { resize: vertical; min-height: 120px; }
 
@@ -706,6 +705,10 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   background: #fee2e2;
   color: #991b1b;
   border: 1px solid #fca5a5;
+}
+
+@media (max-width: 700px) {
+  .form__row { grid-template-columns: 1fr; }
 }
 
 /* ─── FOOTER ─────────────────────────────────────────────── */
@@ -926,13 +929,6 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
     border-radius: 8px;
     padding: 0.75rem 1rem;
   }
-
-  .contact__grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .form__row { grid-template-columns: 1fr; }
 
   .about__stats { justify-content: center; }
 

@@ -83,33 +83,22 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
-// ─── CONTACT FORM (AJAX with Formspree) ───────────────────────
+// ─── CONTACT FORM (Formspree AJAX) ────────────────────────────
 
 const form       = document.getElementById('contact-form');
 const submitBtn  = document.getElementById('submit-btn');
 const formStatus = document.getElementById('form-status');
 
 if (form) {
-  // Check if the user has set up Formspree
-  const action = form.getAttribute('action') || '';
-  const isPlaceholder = action.includes('YOUR_FORM_ID');
-
   form.addEventListener('submit', async e => {
     e.preventDefault();
-
-    if (isPlaceholder) {
-      showStatus('error', '⚠️ Contact form not yet configured. Please call or text us at 515-250-0911, or email weiss.lawncare@aol.com directly!');
-      return;
-    }
-
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
 
     try {
-      const data = new FormData(form);
       const response = await fetch(form.action, {
         method: 'POST',
-        body: data,
+        body: new FormData(form),
         headers: { 'Accept': 'application/json' },
       });
 
@@ -119,7 +108,7 @@ if (form) {
       } else {
         const json = await response.json().catch(() => ({}));
         const msg = json.errors?.map(e => e.message).join(', ') || 'Something went wrong.';
-        showStatus('error', `❌ ${msg} — please try calling us at 515-250-0911.`);
+        showStatus('error', `❌ ${msg} — please call us at 515-250-0911.`);
       }
     } catch {
       showStatus('error', '❌ Network error. Please call or text 515-250-0911.');
